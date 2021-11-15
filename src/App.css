@@ -11,6 +11,9 @@
 h1{
     font-size: 2rem!important;
 }
+p{
+    color: black;
+}
 a:hover{
     color: var(--pink) !important;
 }

@@ -9,7 +9,7 @@ import {
     MenuOutlined
 } from '@ant-design/icons'
 
-import icon from "../images/icons8-transfer-64.png"
+import icon from "../images/btc-crypto-cryptocurrency-cryptocurrencies-cash-money-bank-payment_95688 (1).png"
 
 const  Navbar = () => {
     return (
