@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CryptoDetails() {
+const  CryptoDetails = () => {
     return (
         <div>
             CryptoDetails

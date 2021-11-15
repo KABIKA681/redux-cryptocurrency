@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Exchanges() {
+const  Exchanges = () => {
     return (
         <div>
             Exchanges
