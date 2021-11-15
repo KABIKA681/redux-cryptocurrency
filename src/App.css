@@ -8,7 +8,9 @@
     font-family: 'Poppins', sans-serif;
 
 }
-
+h1{
+    font-size: 2rem!important;
+}
 a:hover{
     color: var(--pink) !important;
 }
