@@ -16,7 +16,7 @@ const CryptoDetails = () => {
     const [timePeriod, setTimePeriod] = useState('7d')
     const { data, isFetching } = useGetCryptoDetailsQuery(coinId)
   const cryptoDetails = data?.data?.coin;
-
+  console.log(data)
   
   const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
   
@@ -25,26 +25,81 @@ const CryptoDetails = () => {
     { title: 'Rank', value: cryptoDetails?.rank, icon: <NumberOutlined /> },
     { title: '24h Volume', value: `$ ${data?.data?.coin.volume && millify(data?.data?.coin.volume)}`, icon: <ThunderboltOutlined /> },
     { title: 'Market Cap', value: `$ ${data?.data?.coin.marketCap && millify(data?.data?.coin.marketCap)}`, icon: <DollarCircleOutlined /> },
-    { title: 'All-time-high(daily avg.)', value: `$ ${millify(data?.data?.coin.allTimeHigh.price)}`, icon: <TrophyOutlined /> },
+    { title: 'All-time-high(daily avg.)', value: `$ ${data?.data?.coin && millify(data?.data?.coin.allTimeHigh.price)}`, icon: <TrophyOutlined /> },
   ];
 
   const genericStats = [
     { title: 'Number Of Markets', value: data?.data?.coin.numberOfMarkets, icon: <FundOutlined /> },
     { title: 'Number Of Exchanges', value: data?.data?.coin.numberOfExchanges, icon: <MoneyCollectOutlined /> },
     { title: 'Aprroved Supply', value: data?.data?.coin.approvedSupply ? <CheckOutlined /> : <StopOutlined />, icon: <ExclamationCircleOutlined /> },
-    { title: 'Total Supply', value: `$ ${millify(data?.data?.coin.totalSupply)}`, icon: <ExclamationCircleOutlined /> },
-    { title: 'Circulating Supply', value: `$ ${millify(data?.data?.coin.circulatingSupply)}`, icon: <ExclamationCircleOutlined /> },
+    { title: 'Total Supply', value: `$ ${data?.data?.coin && millify(data?.data?.coin.totalSupply)}`, icon: <ExclamationCircleOutlined /> },
+    { title: 'Circulating Supply', value: `$ ${data?.data?.coin && millify(data?.data?.coin.circulatingSupply)}`, icon: <ExclamationCircleOutlined /> },
   ];
-
-   
 
   return (
     <>
       <Col className='coin-detail-container'>
         <Col className='coin-heading-container'>
           <Title level={2} className='coin-name'>
-            {cryptoDetails.name} ({cryptoDetails.slug}) Price
+            {cryptoDetails?.name} ({cryptoDetails?.slug}) Price
           </Title>
+          <p>
+            {cryptoDetails?.name} live price in Us dollars.
+            View value statistics, market cap and supply.
+          </p>
+        </Col>
+        <Select
+          defaultValue="7d"
+          className="select-timeperiod"
+          placeholder="Select Time Period"
+          onChange={(value) => setTimePeriod(value)}
+        >
+          {time.map((date) => <Option key={date}>{ date}</Option>)}   
+        </Select>
+        <Col className='stats-container'>
+          <Col className='coin-value-statistics'>
+            <Col className='coin-value-statistics-heading'>
+              <Title level={3} className='coin-details-heading'>
+                {cryptoDetails?.name} value Statistics
+              </Title>
+              <p>
+                An Overview showing the stats of {cryptoDetails?.name}
+              </p>
+            </Col>
+            {stats.map(({ icon, title, value }) => (
+              <Col className='coin-stats'>
+                <Col className='coin-stats-name'>
+                  <Text>{icon}</Text>
+                  <Text>{ title}</Text>
+                  
+                </Col>
+                <Text className='stats'>{value }</Text>
+              </Col >
+            ))}
+          </Col>
+          <Col className='other-stats-info'>
+            <Col className='coin-value-statistics-heading'>
+              <Title level={3} className='coin-details-heading'>
+                Other Statistics.
+              </Title>
+              <p>
+                An Overview showing the stats of all cryptocurrencies
+              </p>
+            </Col>
+            {genericStats.map(({ icon, title, value }) => (
+              <Col className='coin-stats'>
+                <Col className='coin-stats-name'>
+                  <Text>{icon}</Text>
+                  <Text>{ title}</Text>
+                  
+                </Col>
+                <Text className='stats'>{value }</Text>
+              </Col >
+            ))}
+          </Col>
+        </Col>
+        <Col className='coin-'>
+        
         </Col>
       </Col>
       </>
