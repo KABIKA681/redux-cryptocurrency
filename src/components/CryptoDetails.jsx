@@ -93,13 +93,23 @@ const CryptoDetails = () => {
                   <Text>{ title}</Text>
                   
                 </Col>
-                <Text className='stats'>{value }</Text>
+                <Text className='stats'>{ value }</Text>
               </Col >
             ))}
           </Col>
         </Col>
-        <Col className='coin-'>
-        
+        <Col className='coin-desc-link'>
+          <Row className='coin-desc'>
+            <Title level={3} className='coin-details-heading'>
+              What is {cryptoDetails?.name}
+              {HTMLReactParser(cryptoDetails?.description)}
+            </Title>
+          </Row>
+          <Col className='coin-links'>
+            <Title level={3} className='coin-details-heading'>
+              {cryptoDetails?.name} Links
+            </Title>
+          </Col>
         </Col>
       </Col>
       </>
