@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { Button, Menu, Typography, Avatar } from "antd"
 import { Link } from 'react-router-dom'
 import {
@@ -11,7 +11,16 @@ import {
 
 import icon from "../images/btc-crypto-cryptocurrency-cryptocurrencies-cash-money-bank-payment_95688 (1).png"
 
-const  Navbar = () => {
+const Navbar = () => {
+    const [activeMenu, setActiveMenu] = useState(true);
+    const [screenSize, setScreenSize] = useState(null);
+
+    useEffect(() => {
+        const handleResize = () => setScreenSize(window.innerWidth);
+    }, [])
+
+
+
     return (
         <div className='nav-container'>
             <div className="logo-container">
